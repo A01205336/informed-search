@@ -32,7 +32,7 @@ class Node():
                 self.key += str(j)
             self.key += ";"
 
-    def Children(self):
+    def Children(self,goal):
         for i in range(len(self.state)):
             for j in range(len(self.state)):
                 if len(self.state[i]) > 0:
@@ -86,12 +86,14 @@ if __name__ =="__main__":
     lines = []
     visited = []
     min_heap = []
-    count =0
 
 
+    lines.append("2" )
+    lines.append("(A); (B); (C)")
+    lines.append("(A, C); X; X")
 
-    for line in fileinput.input():
-        lines.append(line)
+    #for line in fileinput.input():
+     #   lines.append(line)
 
     height=int(lines[0])
     ini=lines[1]
@@ -101,7 +103,7 @@ if __name__ =="__main__":
     stacks=list(map(ordering,ini.split(';')))
 
 
-    initial = Node(stacks, height)
+    initialNode = Node(stacks, height)
     goalNode = Node(goal, height)
 
 
@@ -109,30 +111,29 @@ if __name__ =="__main__":
         print('No solution found')
         exit()
 
-    if not checkHeight(initial.state, height):
+    if not checkHeight(initialNode.state, height):
         print('No solution found')
         exit()
 
-    heapq.heappush(min_heap, initial)
+    heapq.heappush(min_heap, initialNode)
     while(True):
 
         if(len(min_heap) == 0):
             print("No solution found")
             exit()
 
-        current = heapq.heappop(min_heap)
-        count += 1
-        visited.append(current)
+        currentNode = heapq.heappop(min_heap)
+        visited.append(currentNode)
 
-        current.Children()
+        currentNode.Children(goalNode)
 
-        if check_goal(current, goalNode):
-            print(current.path_cost)
+        if check_goal(currentNode, goalNode):
+            print(currentNode.path_cost)
             path = []
-            print_action(current, path)
+            print_action(currentNode, path)
             print("; ".join(map(str, path)))
 
             break
 
-        for i in range(len(current.children)):
-            heapq.heappush(min_heap, current.children[i])
+        for i in range(len(currentNode.children)):
+            heapq.heappush(min_heap, currentNode.children[i])
