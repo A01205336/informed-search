@@ -88,12 +88,10 @@ if __name__ =="__main__":
     min_heap = []
 
 
-    lines.append("2" )
-    lines.append("(A); (B); (C)")
-    lines.append("(A, C); X; X")
 
-    #for line in fileinput.input():
-     #   lines.append(line)
+
+    for line in fileinput.input():
+        lines.append(line)
 
     height=int(lines[0])
     ini=lines[1]
