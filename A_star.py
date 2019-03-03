@@ -45,6 +45,7 @@ class Node():
                         self.children.append(auxNode)
                         auxNode.heuristic(goal)
 
+
     def heuristic(self, goal):
         for i in range(len(goal.state)):
             if(self.state[i] != list() and goal.state[i] != list()):
@@ -54,11 +55,11 @@ class Node():
         self.f_cost = self.heuristic_cost + self.path_cost
 
 
-
-def ordering(a):
-    a = a.strip().lstrip('(').rstrip(')').split(',')
-    a = list(map(lambda x: x.lstrip(), a))
-    return a
+def ordering(data):
+    data = data.strip().lstrip('(').rstrip(')').split(',')
+    data=list(filter(None, data))
+    data = list(map(lambda x: x.lstrip(), data))
+    return data
 
 def checkHeight(stacks,max_height):
     for stack in stacks:
@@ -87,11 +88,13 @@ if __name__ =="__main__":
     visited = []
     min_heap = []
 
+    lines.append("3" )
+    lines.append("(A); (B); (C); ()")
+    lines.append("(); (A); (B); (C)")
 
 
-
-    for line in fileinput.input():
-        lines.append(line)
+    #for line in fileinput.input():
+     #   lines.append(line)
 
     height=int(lines[0])
     ini=lines[1]
