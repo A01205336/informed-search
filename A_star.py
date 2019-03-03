@@ -87,14 +87,14 @@ if __name__ =="__main__":
     lines = []
     visited = []
     min_heap = []
-
+    """
     lines.append("3" )
     lines.append("(A); (B); (C); ()")
     lines.append("(); (A); (B); (C)")
+    """
 
-
-    #for line in fileinput.input():
-     #   lines.append(line)
+    for line in fileinput.input():
+        lines.append(line)
 
     height=int(lines[0])
     ini=lines[1]
