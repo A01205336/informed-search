@@ -48,6 +48,7 @@ class Node():
 
 def ordering(data):
     data = data.strip().lstrip('(').rstrip(')').split(',')
+    data=list(filter(None, data))
     data = list(map(lambda x: x.lstrip(), data))
     return data
 
